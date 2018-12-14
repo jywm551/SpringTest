@@ -1,0 +1,36 @@
+spring:
+    application:
+        name: jpa
+    datasource:
+        url: jdbc:mysql://localhost:3306/single?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+        username: root
+        password: yu123456
+        driver-class-name: com.mysql.jdbc.Driver
+
+    jpa:
+        properties:
+            hibernate:
+                hbm2ddl:
+                    auto: update
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        show-sql: true
+security:
+    oauth2:
+        resource:
+            id: jpa
+            user-info-uri: http://localhost:8090/authentication/user
+            prefer-token-info: false
+
+
+# eureka-client
+eureka:
+    client:
+        healthcheck:
+            enabled: true # 开启健康检查
+        serviceUrl:
+            defaultZone: http://pcm:pwd2018local@localhost:8761/eureka/
+    instance:
+        prefer-ip-address: true # 开启ip访问
+        instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port} # 应用名称:ip:端口
+server:
+    port: 8080

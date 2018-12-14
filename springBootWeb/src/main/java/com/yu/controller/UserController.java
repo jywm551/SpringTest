@@ -1,12 +1,10 @@
 package com.yu.controller;
 
-import com.yu.DTO.UserDTO;
 import com.yu.domain.User;
 import com.yu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,19 +18,13 @@ public class UserController {
 
     @Autowired
     UserService userService;
-
-    @GetMapping("/getUser")
-    public UserDTO getUser(@RequestParam Integer id) {
-        return userService.getUser(id);
-    }
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping("/findAll")
-    public List<UserDTO> findAll() {
-        return userService.findAll();
+    public List<User> findAll() {
+        List<User> all = userService.getAll();
+        return all;
     }
 
-    @PostMapping("/newUser")
-    public UserDTO newUser(@RequestParam String name) {
-        return userService.newUser(name);
-    }
 }

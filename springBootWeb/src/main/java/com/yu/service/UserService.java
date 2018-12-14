@@ -1,6 +1,6 @@
 package com.yu.service;
 
-import com.yu.DTO.UserDTO;
+import com.yu.domain.User;
 
 import java.util.List;
 
@@ -9,9 +9,5 @@ import java.util.List;
  * Description：
  **/
 public interface UserService {
-    UserDTO getUser(Integer id);
-
-    List<UserDTO> findAll();
-
-    UserDTO newUser(String name);
+    List<User> getAll();
 }
